@@ -41,21 +41,6 @@
             margin-bottom: 20px;
             justify-self: center;
         }
-        .title{
-            font-size: var(--lg);
-            margin-bottom: 12px;
-            text-align: center;
-            color: var(--snow-white);
-            margin-bottom: 0;
-        }
-        .subtitle{
-            color: var(--steel-gray);
-            font-size: var(--md);
-            text-align: center;
-            font-weight: 300;
-            margin-top: 0;
-            margin-bottom: 30px;
-        }
         .form{
             display: flex;
             flex-direction: column;
@@ -86,9 +71,32 @@
             font-weight: bold;
             height: 50px;
         }
+        .secondary-button{
+            background: var(--konecta-blue);
+            border: solid 1px var(--blue-navy);
+            color: var(--snow-white);
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            font-size: var(--md);
+            font-weight: bold;
+            height: 50px;
+        }
         .login-button{
             margin-top: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 0px;
+        }
+        .form{
+            display: flex;
+            flex-direction: column;
+        }
+        .form a{
+            color: var(--yellow-tomorrow);
+            text-decoration: none;
+            font-size: var(--sm);
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 0;
         }
     </style>
 </head>
@@ -96,15 +104,17 @@
         <div class="login">
             <div class="form-container">
             <img src="./ImagenCorporativa/Konecta Logo/Konecta_Logo_RGB_White.png" alt="logo" class="logo">
-            <h1 class="title">Create a new password</h1>
-            <p class="subtitle">A new password for your acount</p>
             <form action="" class="form">
+                <label for="email" class="label">Email address</address></label>
+                <input type="text" id="email" placeholder="example@konecta.com" class="input input-email">
                 <label for="password" class="label">Password</label>
                 <input type="password" id="password" placeholder="*********" class="input input-password">
-                <label for="new-password" class="label">Re-enter Password</label>
-                <input type="password" id="new-password" placeholder="*********" class="input input-password">
-                <input type="submit" value="Confirm" class="primary-button login-button">
+                <input type="submit" value="Login" class="primary-button login-button">
+                <a href="./">Forgot my password</a>
             </form>
+            <button class="secondary-button signup-button">
+                Sing up
+            </button>
             </div>
         </div>
     </body>
