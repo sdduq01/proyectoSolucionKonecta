@@ -34,9 +34,7 @@
         .form-container{
             display: grid;
             grid-template-rows: auto 1fr auto;
-            width: 400px;
-            justify-items: center;
-
+            width: 300px;
         }
         .logo{
             width: 250px;
@@ -46,21 +44,28 @@
         .title{
             font-size: var(--lg);
             margin-bottom: 12px;
-            text-align: center;
+            text-align: start;
             color: var(--snow-white);
-            margin-bottom: 0;
-        }
-        .subtitle{
-            color: var(--steel-gray);
-            font-size: var(--md);
-            text-align: center;
-            font-weight: 300;
-            margin-top: 0;
             margin-bottom: 30px;
         }
         .form{
             display: flex;
             flex-direction: column;
+        }
+        .label{
+            font-size: var(--sm);
+            font-weight: bold;
+            color: var(--snow-white);
+            margin-bottom: 4px;
+        }
+        .input{
+            background-color: var(--steel-gray);
+            border: none;
+            border-radius: 8px;
+            height: 28px;
+            font-size: var(--md);
+            padding: 8px;
+            margin-bottom: 12px;
         }
         .primary-button{
             background: var(--blue-navy);
@@ -76,52 +81,38 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            margin-top: 20px;
         }
         .login-button{
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 22px;
+            margin-bottom: 22px;
         }
-        .email-image{
-            width: 100px;
-            height: 100px;
-            background: var(--steel-gray);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .input-name{
+            margin-bottom: 22px;
         }
-        .email-image img {
-            width: 80px;
+        .input-email{
+            margin-bottom: 22px;
         }
-        .resend{
-            font-size: var(--sm);
-        }
-        .resend span{
-            color: var(--steel-gray);
-        }
-        .resend a{
-            text-decoration: none;
-            color: var(--yellow-tomorrow);
+        .input-password{
+            margin-bottom: 22px;
         }
     </style>
 </head>
     <body>
         <div class="login">
             <div class="form-container">
-                <img src="./ImagenCorporativa/Konecta Logo/Konecta_Logo_RGB_White.png" alt="logo" class="logo">
-                <h1 class="title">Email has been send</h1>
-                <p class="subtitle">Please check your inbox for instructions on how to reset the password</p>
-                <div>
-                    <div class="email-image">
-                        <img src="./ImagenCorporativa/Iconos/Icono Mensage.png" alt="email">
-                    </div>
-                </div>
-                <a href="./inicioDeSesion.html" class="primary-button create-alert-button">Login</a>
-                <p class="resend">
-                    <span>Didn't receive the email?</span>
-                    <a href="./envioDeMensaje.html">Resend</a>
-                </p>
+            <h1 class="title">Create a new account</h1>
+            <form action="" class="form">
+                <label for="name" class="label">Name</label>
+                <input type="text" id="name" placeholder="Konecta" class="input input-name">
+
+                <label for="email" class="label">Email address</label>
+                <input type="text" id="email" placeholder="example@konecta.com" class="input input-email">
+
+                <label for="password" class="label">Password</label>
+                <input type="password" id="password" placeholder="*********" class="input input-password">
+                <a href="./inicioDeSesion.html" class="primary-button create-alert-button">Create</a>
+            
+            </form>
             </div>
         </div>
     </body>
