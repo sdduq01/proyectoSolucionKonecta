@@ -123,41 +123,51 @@
             align-content: center;
             font-weight: 300;
         }
+        .create-alert-button{
+            text-decoration: none;
+            font-size: var(--md0);
+            color: var(--snow-white);
+            margin: 0px 10px 10px 10px;
+            align-content: center;
+            font-weight: 300;
+        }
     </style>
 </head>
     <body>
         <div class="create-alert">
             <img src="./ImagenCorporativa/Konecta Logo/Konecta_Logo_RGB_White.png" alt="logo" class="logo">
             <h1 class="title">Create a new alert</h1>
-            <div class="parameters">
+            <div class="parameters" >
                 <div class="form-container">
                     <h1 class="title">Alert parameters</h1>
-                    <form action="" class="form">
+                    <form action="" class="form" id="parametersalertform">
                         <label for="campaign" class="label">Campaign</label>
-                        <input type="text" id="campaign" class="input input-campaign">
-                        <label for="metric" class="label">Metric</label>
-                        <input type="text" id="metric" class="input input-metric">
-                        <label for="target" class="label">Target</label>
-                        <input type="text" id="target" class="input input-target">
+                        <input type="text" id="campaign" class="input input-campaign" required name="campaign">
+                        <label for="metric" class="label" required>Metric</label>
+                        <input type="text" id="metric" name="metric" class="input input-metric" required>
+                        <label for="target" class="label" >Target</label>
+                        <input type="text" id="target" name="target" class="input input-target" required>
                     </form>
                 </div>
                 <div class="form-container">
                     <h1 class="title">Send parameters</h1>
-                    <form action="" class="form">
+                    <form action="" class="form" id="parameterssendform">
                         <label for="frequency" class="label">Monitoring frequency</label>
-                        <input type="text" id="frequency" class="input input-frequency">
+                        <input type="text" id="frequency" name="frequency" class="input input-frequency">
                         <label for="whatssapp" class="label">WhatssApp</label>
-                        <input type="text" id="whatssapp" class="input input-whatssapp">
+                        <input type="text" id="whatssapp" name="whatssapp" class="input input-whatssapp">
                         <label for="email" class="label">Email</label>
-                        <input type="text" id="email" class="input input-Email">
+                        <input type="text" id="email" name="email" class="input input-Email">
                     </form>
                 </div>
             </div>
         </div>
-        <div class="button-container">
-            <a href="./creacionDeAlerta.html" class="primary-button create-alert-button">Create alert</a>
+        <form id="button-container" class="button-container">
+            <a href="./creacionDeAlerta.html" class="primary-button create-alert-button" id="campaign">Create alert</a>
+            <!--<button type="submit" class="primary-button create-alert-button">Create alert</button-->
             <a href="./creacionDeAlerta.html" class="primary-button saving-alert-button">Saving alerts</a>
             <a href="./inicioDeSesion.html" class="primary-button saving-alert-button">Logout</a>
-        </div>
+        </form>
+        <script src="app.js"></script>
     </body>
 </html>

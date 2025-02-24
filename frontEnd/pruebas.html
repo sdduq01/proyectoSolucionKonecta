@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konecta</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function capturarDatos() {
+            const campaign = document.getElementById('campaign').value;
+            const metric = document.getElementById('metric').value;
+            const target = document.getElementById('target').value;
+            const frequency = document.getElementById('frequency').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const email = document.getElementById('email').value;
+
+            const datos = {
+                campaign: campaign,
+                metric: metric,
+                target: target,
+                frequency: frequency,
+                whatsapp: whatsapp,
+                email: email
+            };
+
+            const jsonData = JSON.stringify(datos);
+
+            console.log(jsonData); // Para verificar que los datos se han capturado correctamente
+
+            // Aquí puedes enviar jsonData a tu servidor usando fetch o guardarlo localmente
+            // Ejemplo de envío con fetch:
+            // fetch('URL_DEL_SERVIDOR', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: jsonData
+            // })
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <div class="create-alert">
+        <img src="./ImagenCorporativa/Konecta Logo/Konecta_Logo_RGB_White.png" alt="logo" class="logo">
+        <h1 class="title">Create a new alert</h1>
+        <div class="parameters">
+            <div class="form-container">
+                <h1 class="title">Alert parameters</h1>
+                <form action="" class="form" onsubmit="event.preventDefault(); capturarDatos();">
+                    <label for="campaign" class="label">Campaign</label>
+                    <input type="text" id="campaign" class="input input-campaign">
+                    <label for="metric" class="label">Metric</label>
+                    <input type="text" id="metric" class="input input-metric">
+                    <label for="target" class="label">Target</label>
+                    <input type="text" id="target" class="input input-target">
+                    <button type="submit" class="primary-button login-button">Save</button>
+                </form>
+            </div>
+            <div class="form-container">
+                <h1 class="title">Send parameters</h1>
+                <form action="" class="form" onsubmit="event.preventDefault(); capturarDatos();">
+                    <label for="frequency" class="label">Monitoring frequency</label>
+                    <input type="text" id="frequency" class="input input-frequency">
+                    <label for="whatsapp" class="label">WhatsApp</label>
+                    <input type="text" id="whatsapp" class="input input-whatsapp">
+                    <label for="email" class="label">Email</label>
+                    <input type="text" id="email" class="input input-email">
+                    <button type="submit" class="primary-button login-button">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
