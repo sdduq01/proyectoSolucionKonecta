@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Alertas - Konecta</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2800c8;
+    }
+
+    .alert-table {
+      width: 100%;
+      max-width: 1000px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .alert-table th, .alert-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .alert-table th {
+      background-color: #2800c8;
+      color: #ffffff;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-edit {
+      background-color: #ffc107;
+      color: #111;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .btn-refresh {
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+      background-color: #0f0f72;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gestión de Alertas</h1>
+
+  <table class="alert-table">
+    <thead>
+      <tr>
+        <th>Campaña</th>
+        <th>Métrica</th>
+        <th>Objetivo</th>
+        <th>Frecuencia</th>
+        <th>WhatsApp</th>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Ejemplo estático, luego reemplazar con JS -->
+      <tr>
+        <td>Campaña A</td>
+        <td>Abandono</td>
+        <td>5%</td>
+        <td>Diaria</td>
+        <td>+573001234567</td>
+        <td>user@example.com</td>
+        <td class="actions">
+          <button class="btn btn-edit" onclick="editarAlerta(1)">Editar</button>
+          <button class="btn btn-delete" onclick="eliminarAlerta(1)">Eliminar</button>
+        </td>
+      </tr>
+      <!-- Más filas dinámicas aquí -->
+    </tbody>
+  </table>
+
+  <button class="btn-refresh" onclick="cargarAlertas()">Recargar</button>
+
+  <script>
+    function editarAlerta(id) {
+      alert('Editar alerta ID: ' + id);
+      // Aquí podrías abrir un modal o redirigir a un formulario de edición
+    }
+
+    function eliminarAlerta(id) {
+      const confirmar = confirm('¿Estás seguro de eliminar esta alerta?');
+      if (confirmar) {
+        alert('Eliminar alerta ID: ' + id);
+        // Aquí va el código para llamar al backend y eliminar la alerta
+      }
+    }
+
+    function cargarAlertas() {
+      alert('Cargar alertas desde BigQuery (simulado)');
+      // Aquí puedes hacer un fetch a tu backend para obtener las alertas
+    }
+  </script>
+</body>
+</html>
