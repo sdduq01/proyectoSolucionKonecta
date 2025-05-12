@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const createAlertButton = document.getElementById("create-alert-button");
     const campaignSelect = document.getElementById("campaign");
+    const metricSelect = document.getElementById("metric");
 
     // 🟢 Cargar campañas desde la función Cloud al iniciar
     fetch("https://us-central1-kam-bi-451418.cloudfunctions.net/get_campaigns")
@@ -23,12 +24,49 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("⚠️ No se pudieron cargar las campañas.");
         });
 
+    // 🟡 Cargar métricas asociadas cuando se seleccione una campaña
+    campaignSelect.addEventListener("change", function () {
+        const selectedCampaign = campaignSelect.value;
+
+        // Limpiar opciones anteriores del dropdown de métricas
+        metricSelect.innerHTML = '<option value="">Seleccione una métrica</option>';
+
+        if (!selectedCampaign) return;
+
+        // Fetch las métricas relacionadas con la campaña seleccionada
+        fetch("https://us-central1-kam-bi-451418.cloudfunctions.net/get_metrics", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ campaign: selectedCampaign })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Respuesta no válida del servidor.");
+            return response.json();
+        })
+        .then(data => {
+            console.log("✅ Métricas filtradas recibidas:", data);
+            data.forEach(metric => {
+                const option = document.createElement("option");
+                option.value = metric;
+                option.textContent = metric;
+                metricSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("❌ Error al obtener métricas filtradas:", error);
+            alert("⚠️ No se pudieron cargar las métricas para la campaña seleccionada.");
+        });
+    });
+
+    // 🔴 Lógica para crear la alerta
     if (createAlertButton) {
         createAlertButton.addEventListener("click", function () {
             console.log("Botón clickeado");
 
-            const campaign = campaignSelect.value.trim(); // Usar el valor seleccionado
-            const metric = document.getElementById("metric").value.trim();
+            const campaign = campaignSelect.value.trim();
+            const metric = metricSelect.value.trim();
             const target = document.getElementById("target").value.trim();
             const frequency = document.getElementById("frequency").value.trim();
             const whatsapp = document.getElementById("whatssapp").value.trim();
@@ -71,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 console.log("✅ Confirmado. Alerta creada:", data);
 
-                fetch("https://us-central1-kam-bi-451418.cloudfunctions.net/save_alert", { 
+                fetch("https://us-central1-kam-bi-451418.cloudfunctions.net/save_alert", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
