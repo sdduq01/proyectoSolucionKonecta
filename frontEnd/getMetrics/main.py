@@ -3,7 +3,6 @@ from google.cloud import bigquery
 
 def get_metrics(request):
     if request.method == 'OPTIONS':
-        # Respuesta a preflight
         headers = {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',

@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const campaignSelect = document.getElementById("campaign");
     const metricSelect = document.getElementById("metric");
 
-    // 🟢 Cargar campañas desde la función Cloud al iniciar
     fetch("https://us-central1-kam-bi-451418.cloudfunctions.net/get_campaigns")
         .then(response => response.json())
         .then(data => {
@@ -24,16 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("⚠️ No se pudieron cargar las campañas.");
         });
 
-    // 🟡 Cargar métricas asociadas cuando se seleccione una campaña
     campaignSelect.addEventListener("change", function () {
         const selectedCampaign = campaignSelect.value;
 
-        // Limpiar opciones anteriores del dropdown de métricas
         metricSelect.innerHTML = '<option value="">Seleccione una métrica</option>';
 
         if (!selectedCampaign) return;
 
-        // Fetch las métricas relacionadas con la campaña seleccionada
         fetch("https://us-central1-kam-bi-451418.cloudfunctions.net/get_metrics", {
             method: "POST",
             headers: {
@@ -60,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 🔴 Lógica para crear la alerta
     if (createAlertButton) {
         createAlertButton.addEventListener("click", function () {
             console.log("Botón clickeado");
