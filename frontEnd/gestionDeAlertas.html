@@ -1,133 +1,286 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gestión de Alertas - Konecta</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f4f6f9;
-      margin: 0;
-      padding: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Alertas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
 
-    h1 {
-      text-align: center;
-      color: #2800c8;
-    }
+        h1, h2 {
+            text-align: center;
+        }
 
-    .alert-table {
-      width: 100%;
-      max-width: 1000px;
-      margin: 20px auto;
-      border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
 
-    .alert-table th, .alert-table td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
+        .alert-item {
+            margin-bottom: 15px;
+        }
 
-    .alert-table th {
-      background-color: #2800c8;
-      color: #ffffff;
-    }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
 
-    .actions {
-      display: flex;
-      gap: 10px;
-    }
+        input[type="text"],
+        input[type="email"] {
+            width: 90%;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto;
+        }
 
-    .btn {
-      padding: 6px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+        input[type="checkbox"] {
+            transform: scale(1.2);
+            margin-left: 5px;
+        }
 
-    .btn-edit {
-      background-color: #ffc107;
-      color: #111;
-    }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-    .btn-delete {
-      background-color: #dc3545;
-      color: #fff;
-    }
+        button:hover {
+            background-color: #0056b3;
+        }
 
-    .btn-refresh {
-      display: block;
-      margin: 0 auto;
-      margin-top: 20px;
-      background-color: #0f0f72;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  </style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        td button {
+            margin: 0 4px;
+        }
+
+        #alert-form {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>Gestión de Alertas</h1>
+    <h1>Gestión de Alertas</h1>
 
-  <table class="alert-table">
-    <thead>
-      <tr>
-        <th>Campaña</th>
-        <th>Métrica</th>
-        <th>Objetivo</th>
-        <th>Frecuencia</th>
-        <th>WhatsApp</th>
-        <th>Email</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Ejemplo estático, luego reemplazar con JS -->
-      <tr>
-        <td>Campaña A</td>
-        <td>Abandono</td>
-        <td>5%</td>
-        <td>Diaria</td>
-        <td>+573001234567</td>
-        <td>user@example.com</td>
-        <td class="actions">
-          <button class="btn btn-edit" onclick="editarAlerta(1)">Editar</button>
-          <button class="btn btn-delete" onclick="eliminarAlerta(1)">Eliminar</button>
-        </td>
-      </tr>
-      <!-- Más filas dinámicas aquí -->
-    </tbody>
-  </table>
+    <!-- Formulario para editar una alerta -->
+    <div id="alert-form">
+        <h2>Actualizar Alerta</h2>
+        <form id="updateForm">
+            <div class="alert-item">
+                <label for="campaign">Campaña:</label>
+                <input type="text" id="campaign" name="campaign" required>
+            </div>
+            <div class="alert-item">
+                <label for="metric">Métrica:</label>
+                <input type="text" id="metric" name="metric" required>
+            </div>
+            <div class="alert-item">
+                <label for="target">Objetivo:</label>
+                <input type="text" id="target" name="target" required>
+            </div>
+            <div class="alert-item">
+                <label for="frequency">Frecuencia:</label>
+                <input type="text" id="frequency" name="frequency" required>
+            </div>
+            <div class="alert-item">
+                <label for="whatsapp">WhatsApp:</label>
+                <input type="text" id="whatsapp" name="whatsapp" required>
+            </div>
+            <div class="alert-item">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="alert-item">
+                <label for="enabled">Activada:</label>
+                <input type="checkbox" id="enabled" name="enabled">
+            </div>
+            <div style="text-align: center;">
+                <button type="submit">Actualizar</button>
+            </div>
+        </form>
+    </div>
 
-  <button class="btn-refresh" onclick="cargarAlertas()">Recargar</button>
+    <!-- Tabla para mostrar las alertas actuales -->
+    <table id="alerts-table">
+        <thead>
+            <tr>
+                <th>Campaña</th>
+                <th>Métrica</th>
+                <th>Objetivo</th>
+                <th>Frecuencia</th>
+                <th>WhatsApp</th>
+                <th>Correo</th>
+                <th>Activada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenarán las alertas desde JavaScript -->
+        </tbody>
+    </table>
 
-  <script>
-    function editarAlerta(id) {
-      alert('Editar alerta ID: ' + id);
-      // Aquí podrías abrir un modal o redirigir a un formulario de edición
-    }
+    <script>
+        const apiUrl = 'https://us-central1-kam-bi-451418.cloudfunctions.net/management_alerts';
 
-    function eliminarAlerta(id) {
-      const confirmar = confirm('¿Estás seguro de eliminar esta alerta?');
-      if (confirmar) {
-        alert('Eliminar alerta ID: ' + id);
-        // Aquí va el código para llamar al backend y eliminar la alerta
-      }
-    }
+        window.onload = function () {
+            fetchAlerts();
+        };
 
-    function cargarAlertas() {
-      alert('Cargar alertas desde BigQuery (simulado)');
-      // Aquí puedes hacer un fetch a tu backend para obtener las alertas
-    }
-  </script>
+        async function fetchAlerts() {
+            try {
+                const response = await fetch(apiUrl + '?action=list');
+                const result = await response.json();
+                if (!result.alerts || result.alerts.length === 0) {
+                    alert("No se encontraron alertas.");
+                    return;
+                }
+
+                const alertsTable = document.getElementById("alerts-table").getElementsByTagName('tbody')[0];
+                alertsTable.innerHTML = '';
+
+                result.alerts.forEach(alert => {
+                    const row = alertsTable.insertRow();
+                    row.setAttribute('data-id', alert.id || alert.timestamp);
+
+                    row.innerHTML = `
+                        <td>${alert.campaign}</td>
+                        <td>${alert.metric}</td>
+                        <td>${alert.target}</td>
+                        <td>${alert.frequency}</td>
+                        <td>${alert.whatsapp}</td>
+                        <td>${alert.email}</td>
+                        <td><input type="checkbox" ${alert.enabled ? 'checked' : ''} disabled></td>
+                        <td>
+                            <button onclick="editAlert('${alert.id || alert.timestamp}')">Editar</button>
+                            <button onclick="deleteAlert('${alert.id || alert.timestamp}')">Eliminar</button>
+                        </td>
+                    `;
+                });
+            } catch (error) {
+                alert('Error al cargar las alertas: ' + error);
+            }
+        }
+
+        function editAlert(id) {
+            const row = document.querySelector(`tr[data-id="${id}"]`);
+            if (!row) return;
+
+            document.getElementById('campaign').value = row.cells[0].innerText;
+            document.getElementById('metric').value = row.cells[1].innerText;
+            document.getElementById('target').value = row.cells[2].innerText;
+            document.getElementById('frequency').value = row.cells[3].innerText;
+            document.getElementById('whatsapp').value = row.cells[4].innerText;
+            document.getElementById('email').value = row.cells[5].innerText;
+            document.getElementById('enabled').checked = row.cells[6].children[0].checked;
+
+            document.getElementById('alert-form').style.display = 'block';
+
+            const form = document.getElementById('updateForm');
+            form.onsubmit = function (event) {
+                event.preventDefault();
+                updateAlert(id);
+            };
+        }
+
+        async function updateAlert(id) {
+            const data = {
+                action: 'toggle',
+                id: id,
+                campaign: document.getElementById('campaign').value,
+                metric: document.getElementById('metric').value,
+                target: document.getElementById('target').value,
+                frequency: document.getElementById('frequency').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                email: document.getElementById('email').value,
+                enabled: document.getElementById('enabled').checked
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Alerta actualizada con éxito');
+                    fetchAlerts();
+                    document.getElementById('alert-form').style.display = 'none';
+                } else {
+                    alert('Error al actualizar la alerta: ' + result.error);
+                }
+            } catch (error) {
+                alert('Error al enviar la solicitud: ' + error);
+            }
+        }
+
+        async function deleteAlert(id) {
+            const data = {
+                action: 'delete',
+                id: id
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Alerta eliminada con éxito');
+                    fetchAlerts();
+                } else {
+                    alert('Error al eliminar la alerta: ' + result.error);
+                }
+            } catch (error) {
+                alert('Error al enviar la solicitud: ' + error);
+            }
+        }
+    </script>
 </body>
 </html>

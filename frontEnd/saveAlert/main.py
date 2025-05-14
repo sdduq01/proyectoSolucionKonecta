@@ -3,6 +3,7 @@ from google.cloud import bigquery
 import datetime
 import json
 import logging
+import uuid
 from flask import Response
 
 # Configuración del logger
@@ -42,12 +43,14 @@ def save_alert(request):
                 return Response(f"Missing required field: {field}", status=400, headers=cors_headers)
 
         row = {
+            "id": str(uuid.uuid4()),  # ← Genera el ID único
             "campaign": data.get("campaign"),
             "metric": data.get("metric"),
             "target": data.get("target"),
             "frequency": data.get("frequency"),
             "whatsapp": data.get("whatsapp"),
             "email": data.get("email"),
+            "enabled": True,
             "timestamp": datetime.datetime.utcnow().isoformat()
         }
 
